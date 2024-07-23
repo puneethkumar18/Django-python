@@ -1,7 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
   <head>
     <title>Study budy</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/main.css'%}"
+    />
     <style>
       body {
         body {
@@ -17,6 +23,6 @@
       <li>{{message}}</li>
       {%endfor%}
     </ul>
-    {%endif%} {% block content %} {% endblock %}
+    {% endif %} {% block content %} {% endblock %}
   </body>
 </html>
