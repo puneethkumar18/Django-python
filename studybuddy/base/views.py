@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 
 from .models import Room,Topic,Message
-from .forms import RoomForm
+from .forms import RoomForm,UserForm
 
 # Create your views here.
 
@@ -43,7 +43,7 @@ def loginUser(request):
     
     context = {"page":page} 
             
-    return render(request,'base/login_register.html',context)
+    return render(request,'base/login.html',context)
 
 def logoutUser(request):
     logout(request)
@@ -64,7 +64,7 @@ def registerUser(request):
             messages.error(request,"An error occured during registation")
 
     context = {"page":page,"form":form}
-    return render(request,'base/login_register.html',context)
+    return render(request,'base/login.html',context)
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -144,7 +144,7 @@ def updateRoom(request,pk):
         return HttpResponse('You are to allowed to update in this rooom !!')
     if request.method == "POST":
         form = RoomForm(request.POST,instance=room)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect('home')
     context = {'form':form,'topics':topics}
@@ -170,3 +170,16 @@ def deleteMessage(request,pk):
         room.participants.remove(message.user)
         return redirect('home')
     return render(request,'base/delete.html',{'obj':message})
+
+
+@login_required(login_url='login')
+def updateUser(request):
+    user = request.user
+    userForm = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('userProfile',pk=user.id)
+    return render(request,'base/update-user.html',{'userForm':userForm})
