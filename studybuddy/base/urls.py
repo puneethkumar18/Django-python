@@ -12,5 +12,7 @@ urlpatterns = [
     path('register/',views.registerUser,name="registerUser"),
     path('delete/<str:pk>',views.deleteMessage,name="deleteMessage"),
     path('user-profile/<str:pk>/',views.userProfile,name="userProfile"),
-    path('update-user/',views.updateUser,name="updateUser")
+    path('update-user/',views.updateUser,name="updateUser"),
+    path('topics-page/',views.topicsPage,name="topicsPage"),
+    path('activities/',views.activityPage,name="activityPage")
 ]

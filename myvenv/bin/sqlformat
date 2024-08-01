@@ -1,4 +1,6 @@
-#!/Users/puneethkumarg/Desktop/django-python/myvenv/bin/python3
+#!/bin/sh
+'''exec' "/Users/puneethkumarg/Desktop/Desktop - Puneethkumar’s MacBook Air/django-python/myvenv/bin/python3" "$0" "$@"
+' '''
 # -*- coding: utf-8 -*-
 import re
 import sys
